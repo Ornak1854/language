@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+    <h1 class="mt-5">Welcome to the English Language App</h1>
+    <p>Select an activity to start learning:</p>
+    <ul>
+        <li><a href="{{ url_for('grammar_activity') }}">Grammar Exercises</a></li>
+        <li><a href="{{ url_for('dictation_activity') }}">Dictation Practice</a></li>
+        <li><a href="{{ url_for('vocabulary_activity') }}">Vocabulary Building with Images</a></li>
+    </ul>
+</div>
+{% endblock %}

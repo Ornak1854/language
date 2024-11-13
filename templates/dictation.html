@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+    <h2 class="mt-5">Dictation Practice</h2>
+    <button id="play-passage" class="btn btn-secondary">Play Passage</button>
+    <form method="post">
+        <div class="form-group mt-3">
+            <label for="user_text">Type what you hear:</label>
+            <textarea class="form-control" name="user_text" rows="5" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+    {% if result %}
+        <h3 class="mt-5">Result:</h3>
+        <p>Correct Text:</p>
+        <blockquote>{{ result.passage }}</blockquote>
+        <p>Your Text:</p>
+        <blockquote>{{ result.user_text }}</blockquote>
+        <p>Accuracy: {{ result.accuracy }}%</p>
+    {% endif %}
+</div>
+<script>
+    document.getElementById('play-passage').addEventListener('click', function() {
+        var msg = new SpeechSynthesisUtterance('{{ passage }}');
+        window.speechSynthesis.speak(msg);
+    });
+</script>
+{% endblock %}

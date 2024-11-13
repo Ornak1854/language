@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+    <h2 class="mt-5">Grammar Exercises</h2>
+    <form method="post">
+        {% for question in questions %}
+            <div class="form-group">
+                <label>{{ loop.index }}. {{ question.question }}</label>
+                <input type="text" class="form-control" name="answers" required>
+            </div>
+        {% endfor %}
+        <button type="submit" class="btn btn-primary">Submit Answers</button>
+    </form>
+    {% if results %}
+        <h3 class="mt-5">Results:</h3>
+        {% for result in results['results'] %}
+            <p>
+                {{ loop.index }}. Your answer: {{ result.user_answer }} -
+                {% if result.is_correct %}
+                    <span class="text-success">Correct!</span>
+                {% else %}
+                    <span class="text-danger">Incorrect.</span> Correct answer: {{ result.correct_answer }}
+                {% endif %}
+            </p>
+        {% endfor %}
+    {% endif %}
+</div>
+{% endblock %}

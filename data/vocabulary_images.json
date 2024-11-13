@@ -1,0 +1,10 @@
+[
+    {
+        "filename": "beach.jpg",
+        "keywords": ["beach", "sand", "ocean", "sun", "waves"]
+    },
+    {
+        "filename": "city.jpg",
+        "keywords": ["city", "buildings", "cars", "streets", "people"]
+    }
+]

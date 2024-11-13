@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container">
+    <h2 class="mt-5">Vocabulary Building with Images</h2>
+    <img src="{{ url_for('static', filename='images/vocabulary/' + image.filename) }}" alt="Vocabulary Image" class="img-fluid">
+    <p>Describe the image in detail:</p>
+    <form method="post">
+        <div class="form-group">
+            <textarea class="form-control" name="description" rows="5" id="description" required></textarea>
+        </div>
+        <button type="button" class="btn btn-secondary" id="start-record-btn">Record Description</button>
+        <button type="submit" class="btn btn-primary">Submit Description</button>
+    </form>
+    {% if feedback %}
+        <h3 class="mt-5">Feedback:</h3>
+        <p>{{ feedback.message }}</p>
+    {% endif %}
+</div>
+<script>
+    const startRecordBtn = document.getElementById('start-record-btn');
+    const descriptionField = document.getElementById('description');
+
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    const recognition = new SpeechRecognition();
+
+    startRecordBtn.addEventListener('click', () => {
+        recognition.start();
+    });
+
+    recognition.addEventListener('result', (event) => {
+        const transcript = event.results[0][0].transcript;
+        descriptionField.value += ' ' + transcript;
+    });
+</script>
+{% endblock %}
